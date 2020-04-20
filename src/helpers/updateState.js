@@ -9,6 +9,7 @@ import {
 
 export default function updateState(machine, state) {  
   var newState;
+  var oldState;
   
   if (typeof state === 'undefined') return;
   if (typeof state === 'string' || typeof state === 'number') {
@@ -32,6 +33,7 @@ export default function updateState(machine, state) {
 
   handleMiddleware(MIDDLEWARE_STATE_WILL_CHANGE, machine);
 
+  oldState = machine.state;
   machine.state = newState;
 
   var handler = machine.transitions[newState.name]['_entry'];
